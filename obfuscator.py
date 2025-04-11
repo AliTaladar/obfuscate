@@ -1,6 +1,7 @@
+# obfuscator.py
 import ast
-from transformers import NameCollector, StringEncoder, JunkCodeInserter, ControlFlowAlterer
-from llm_integration import llm_generate_names, llm_generate_junk_function
+from transformers import NameCollector, StringEncoder, JunkCodeInserter, ControlFlowAlterer, CodeEncryptor
+from llm_integration import llm_generate_names
 
 class Obfuscator:
     """Main obfuscator class that applies multiple transformations."""
@@ -8,26 +9,22 @@ class Obfuscator:
         self.transformations = transformations
 
     def obfuscate(self, code):
-        """Obfuscate the input code using LLM-generated names and functions."""
+        """Obfuscate the input code using the specified transformations."""
         tree = ast.parse(code)
         collector = NameCollector()
         collector.visit(tree)
-        names_to_obfuscate = list(collector.names)
-        num_names_needed = len(names_to_obfuscate) + 10  # Extra names for junk functions
-        llm_names = llm_generate_names(num_names_needed)
-        
-        # Map original names to LLM-generated names
-        name_mapping = {}
-        for i, original in enumerate(names_to_obfuscate):
-            name_mapping[original] = llm_names[i]
-        available_names = llm_names[len(names_to_obfuscate):]  # Remaining names for other uses
+        llm_names = llm_generate_names(len(collector.names))
+        name_mapping = {name: llm_names[i] for i, name in enumerate(collector.names)}
 
-        # Apply transformations
         for transform in self.transformations:
-            transformer = transform(name_mapping, available_names)
+            transformer = transform(name_mapping)
             tree = transformer.visit(tree)
+            if isinstance(transformer, CodeEncryptor):
+                # Insert the decrypt function
+                decrypt_func = transformer.get_decrypt_func()
+                tree.body.insert(0, decrypt_func)
 
-        # Insert decode function if string encoding is used
+        # Insert the decode function if string encoding is used
         if any(isinstance(t, type(StringEncoder)) for t in self.transformations):
             decode_func_code = """
 def decode(s):

